@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Madhav J S — Cybersecurity Portfolio</title>
+<style>
+:root {
+  --bg: #090b0f;
+  --panel: #11151e;
+  --panel-line: #222a3d;
+  --text: #e2e8f0;
+  --text-dim: #8b96a5;
+  --accent: #00ffcc;
+  --accent-glow: rgba(0, 255, 204, 0.35);
+  --accent-secondary: #8a2be2;
+  --focus: #00ffcc;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Cyber Grid Background Effect */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: 
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 30px 30px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+a { color: inherit; }
+::selection { background: var(--accent); color: #000; }
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+/* ---------- NAV ---------- */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(9, 11, 15, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--panel-line);
+}
+nav .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+nav .brand {
+  font-weight: 700;
+  font-size: 1.15rem;
+  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  font-size: 0.92rem;
+}
+nav a {
+  text-decoration: none;
+  color: var(--text-dim);
+  transition: color 0.2s ease;
+}
+nav a:hover { color: var(--accent); }
+
+@media (max-width: 600px) {
+  nav ul { gap: 12px; font-size: 0.8rem; }
+}
+
+/* ---------- HERO ---------- */
+header.hero {
+  padding: 90px 0 70px;
+  border-bottom: 1px solid var(--panel-line);
+  position: relative;
+}
+
+.hero-top {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: center;
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  line-height: 1.1;
+  color: #fff;
+}
+
+.hero .role {
+  margin-top: 16px;
+  color: var(--text-dim);
+  font-size: 1.05rem;
+  max-width: 52ch;
+}
+
+.hero .location {
+  margin-top: 8px;
+  color: var(--accent);
+  font-size: 0.9rem;
+  font-family: monospace;
+}
+
+/* Profile Photo Interactive Uploader */
+.avatar-container {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+  box-shadow: 0 0 25px var(--accent-glow);
+  cursor: pointer;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.avatar-container:hover {
+  transform: scale(1.03);
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--panel);
+  display: block;
+}
+
+.avatar-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 0.8rem;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  font-weight: 600;
+}
+
+.avatar-container:hover .avatar-overlay {
+  opacity: 1;
+}
+
+#photo-upload { display: none; }
+
+@media (max-width: 650px) {
+  .hero-top { grid-template-columns: 1fr; justify-items: start; }
+}
+
+.hero-links {
+  margin-top: 30px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.hero-links a {
+  text-decoration: none;
+  font-size: 0.92rem;
+  padding: 10px 20px;
+  border: 1px solid var(--panel-line);
+  border-radius: 6px;
+  color: var(--text);
+  transition: all 0.2s ease;
+  background: var(--panel);
+}
+.hero-links a.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #000;
+  font-weight: 600;
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+.hero-links a:hover { 
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.hero-links a.primary:hover { 
+  opacity: 0.9; 
+  box-shadow: 0 0 25px var(--accent-glow);
+}
+
+/* ---------- SECTIONS ---------- */
+section {
+  padding: 60px 0;
+  border-bottom: 1px solid var(--panel-line);
+}
+section:last-of-type { border-bottom: none; }
+
+section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 24px;
+  position: relative;
+  display: inline-block;
+}
+
+section h2::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 35px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.about p {
+  max-width: 68ch;
+  color: var(--text);
+}
+.about p + p { margin-top: 16px; }
+
+/* timeline */
+.timeline {
+  position: relative;
+  padding-left: 28px;
+  border-left: 2px solid var(--panel-line);
+}
+.timeline-item {
+  position: relative;
+  padding-bottom: 32px;
+  transition: transform 0.2s ease;
+}
+.timeline-item:hover { transform: translateX(6px); }
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -34px;
+  top: 5px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+.timeline-item .when {
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-family: monospace;
+}
+.timeline-item h3 {
+  font-size: 1.1rem;
+  margin-top: 6px;
+}
+.timeline-item p {
+  margin-top: 6px;
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  max-width: 60ch;
+}
+
+/* skills */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+.skills-grid .group {
+  background: var(--panel);
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid var(--panel-line);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.skills-grid .group:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+.skills-grid .group h3 {
+  font-size: 1rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.skills-grid ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.95rem;
+}
+.skills-grid li {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--panel-line);
+  color: var(--text-dim);
+}
+.skills-grid li:last-child { border-bottom: none; }
+
+/* certs list */
+.cert-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.cert-card {
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+  padding: 18px 22px;
+  border-radius: 8px;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.cert-card:hover {
+  border-color: var(--accent-secondary);
+  box-shadow: 0 4px 15px rgba(138, 43, 226, 0.15);
+}
+.cert-card h3 { font-size: 1.05rem; }
+.cert-card .issuer { color: var(--accent); font-size: 0.85rem; font-family: monospace; margin-top: 4px; }
+
+/* contact */
+.contact p { color: var(--text-dim); max-width: 55ch; }
+.contact-links {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-size: 1.05rem;
+}
+.contact-links a { 
+  text-decoration: none; 
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
+}
+.contact-links a:hover { 
+  color: var(--accent); 
+  transform: translateX(6px);
+}
+
+footer {
+  padding: 40px 0 60px;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="brand">Madhav J S</span>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#certs">Certifications</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-top">
+    <div>
+      <h1>Madhav J S</h1>
+      <p class="role">Aspiring Cybersecurity Professional | IEEE Social Media & PR Head SSPU | Ethical Hacking | Network Security | B.Tech CS-IT (Cybersecurity)</p>
+      <p class="location">&gt; Kollam Taluka, Kerala, India / Pune</p>
+      <div class="hero-links">
+        <a class="primary" href="https://www.linkedin.com/in/madhavjs/" target="_blank" rel="noopener">LinkedIn Profile</a>
+        <a href="mailto:madhavampady2008@gmail.com">Email Me</a>
+      </div>
+    </div>
+    
+    <!-- Photo Section -->
+    <label for="photo-upload" class="avatar-container" title="Click to upload photo">
+      <img id="avatar-preview" class="avatar-img" src="WhatsApp Image 2026-08-03 at 1.29.59 PM.jpeg" alt="Madhav J S">
+    </label>
+  </div>
+</header>
+
+<main>
+
+  <section id="about">
+    <div class="wrap about">
+      <h2>About Me</h2>
+      <p>I am a first-year B.Tech student specializing in Computer Science & Information Technology (Cybersecurity) at Symbiosis Skills & Professional University.</p>
+      <p>I am passionate about technology and eager to build a strong foundation in cybersecurity, networking, ethical hacking, cloud computing, and software development. I enjoy learning new technologies, solving problems, and continuously improving my technical skills through projects, certifications, and hands-on practice.</p>
+      <p>I look forward to connecting with students, professionals, and mentors in the cybersecurity and technology community to learn, collaborate, and grow.</p>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="wrap">
+      <h2>Education & Involvement</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="when">Jul 2026 – Sep 2030</div>
+          <h3>Symbiosis Skills & Professional University</h3>
+          <p>Bachelor of Technology, CSIT (Cybersecurity)</p>
+        </div>
+        <div class="timeline-item">
+          <div class="when">May 2024 – Mar 2026</div>
+          <h3>St Antony's Public School</h3>
+          <p>Higher Secondary Education, PCMC</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="certs">
+    <div class="wrap">
+      <h2>Licenses & Certifications</h2>
+      <div class="cert-list">
+        <div class="cert-card">
+          <h3>Cybersecurity Fundamentals</h3>
+          <div class="issuer">IBM • Jul 2026</div>
+        </div>
+        <div class="cert-card">
+          <h3>Getting Started with Cybersecurity</h3>
+          <div class="issuer">IBM • Jul 2026</div>
+        </div>
+        <div class="cert-card">
+          <h3>Introduction to Modern AI</h3>
+          <div class="issuer">Cisco Networking Academy • Jul 2026</div>
+        </div>
+        <div class="cert-card">
+          <h3>Operating Systems Basics</h3>
+          <div class="issuer">Cisco • Jul 2026</div>
+        </div>
+        <div class="cert-card">
+          <h3>Networking Basics</h3>
+          <div class="issuer">Cisco • 2026</div>
+        </div>
+        <div class="cert-card">
+          <h3>Ethical Hacker</h3>
+          <div class="issuer">Cisco • Jun 2026</div>
+        </div>
+        <div class="cert-card">
+          <h3>Introduction to Cybersecurity</h3>
+          <div class="issuer">Cisco • Jun 2026</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <h2>Areas of Interest</h2>
+      <div class="skills-grid">
+        <div class="group">
+          <h3>Security</h3>
+          <ul>
+            <li>Cybersecurity</li>
+            <li>Ethical Hacking</li>
+            <li>Network Security</li>
+          </ul>
+        </div>
+        <div class="group">
+          <h3>Tech Stack</h3>
+          <ul>
+            <li>Cloud Computing</li>
+            <li>Python Programming</li>
+            <li>Linux OS</li>
+            <li>Artificial Intelligence</li>
+          </ul>
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap contact">
+      <h2>Get in Touch</h2>
+      <p>Feel free to connect! I'm always open to discussing technology, collaborating on projects, or connecting with peers in the cybersecurity space.</p>
+      <div class="contact-links">
+        <a href="https://www.linkedin.com/in/madhavjs/" target="_blank" rel="noopener">linkedin.com/in/madhavjs/ →</a>
+        <a href="mailto:madhavampady2008@gmail.com">madhavampady2008@gmail.com →</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    &copy; <span id="year"></span> Madhav J S. 
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const photoUpload = document.getElementById('photo-upload');
+  const avatarPreview = document.getElementById('avatar-preview');
+
+  photoUpload.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        avatarPreview.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+</script>
+
+</body>
+</html>
