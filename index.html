@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Madhav J S — Cybersecurity Portfolio</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="brand">Madhav J S</span>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#certs">Certifications</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-top">
+    <div>
+      <h1>Madhav J S</h1>
+      <p class="role">Aspiring Cybersecurity Professional | IEEE Social Media & PR Head SSPU | Ethical Hacking | Network Security | B.Tech CS-IT (Cybersecurity)</p>
+      <p class="location">&gt; Kollam Taluka, Kerala, India / Pune</p>
+      <div class="hero-links">
+        <a class="primary" href="https://www.linkedin.com/in/madhavjs/" target="_blank" rel="noopener">LinkedIn Profile</a>
+        <a href="mailto:madhavampady2008@gmail.com">Email Me</a>
+      </div>
+    </div>
+    
+    <!-- Photo Section -->
+    <label for="photo-upload" class="avatar-container" title="Click to upload photo">
+      <img id="avatar-preview" class="avatar-img" src="WhatsApp Image 2026-08-03 at 1.29.59 PM.jpeg" alt="Madhav J S">
+    </label>
+  </div>
+</header>
+
+<main>
+
+  <section id="about">
+    <div class="wrap about">
+      <h2>About Me</h2>
+      <p>I am a first-year B.Tech student specializing in Computer Science & Information Technology (Cybersecurity) at Symbiosis Skills & Professional University.</p>
+      <p>I am passionate about technology and eager to build a strong foundation in cybersecurity, networking, ethical hacking, cloud computing, and software development. I enjoy learning new technologies, solving problems, and continuously improving my technical skills through projects, certifications, and hands-on practice.</p>
+      <p>I look forward to connecting with students, professionals, and mentors in the cybersecurity and technology community to learn, collaborate, and grow.</p>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="wrap">
+      <h2>Education & Involvement</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="when">Jul 2026 – Sep 2030</div>
+          <h3>Symbiosis Skills & Professional University</h3>
+          <p>Bachelor of Technology, CSIT (Cybersecurity)</p>
+        </div>
+        <div class="timeline-item">
+          <div class="when">May 2024 – Mar 2026</div>
+          <h3>St Antony's Public School</h3>
+          <p>Higher Secondary Education, PCMC</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="certs">
+    <div class="wrap">
+      <h2>Licenses & Certifications</h2>
+      <div class="cert-list">
+        <div class="cert-card">
+          <h3>Cybersecurity Fundamentals</h3>
+          <div class="issuer">IBM • Jul 2026</div>
+        </div>
+        <div class="cert-card">
+          <h3>Getting Started with Cybersecurity</h3>
+          <div class="issuer">IBM • Jul 2026</div>
+        </div>
+        <div class="cert-card">
+          <h3>Introduction to Modern AI</h3>
+          <div class="issuer">Cisco Networking Academy • Jul 2026</div>
+        </div>
+        <div class="cert-card">
+          <h3>Operating Systems Basics</h3>
+          <div class="issuer">Cisco • Jul 2026</div>
+        </div>
+        <div class="cert-card">
+          <h3>Networking Basics</h3>
+          <div class="issuer">Cisco • 2026</div>
+        </div>
+        <div class="cert-card">
+          <h3>Ethical Hacker</h3>
+          <div class="issuer">Cisco • Jun 2026</div>
+        </div>
+        <div class="cert-card">
+          <h3>Introduction to Cybersecurity</h3>
+          <div class="issuer">Cisco • Jun 2026</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <h2>Areas of Interest</h2>
+      <div class="skills-grid">
+        <div class="group">
+          <h3>Security</h3>
+          <ul>
+            <li>Cybersecurity</li>
+            <li>Ethical Hacking</li>
+            <li>Network Security</li>
+          </ul>
+        </div>
+        <div class="group">
+          <h3>Tech Stack</h3>
+          <ul>
+            <li>Cloud Computing</li>
+            <li>Python Programming</li>
+            <li>Linux OS</li>
+            <li>Artificial Intelligence</li>
+          </ul>
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap contact">
+      <h2>Get in Touch</h2>
+      <p>Feel free to connect! I'm always open to discussing technology, collaborating on projects, or connecting with peers in the cybersecurity space.</p>
+      <div class="contact-links">
+        <a href="https://www.linkedin.com/in/madhavjs/" target="_blank" rel="noopener">linkedin.com/in/madhavjs/ →</a>
+        <a href="mailto:madhavampady2008@gmail.com">madhavampady2008@gmail.com →</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    &copy; <span id="year"></span> Madhav J S. 
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const photoUpload = document.getElementById('photo-upload');
+  const avatarPreview = document.getElementById('avatar-preview');
+
+  photoUpload.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        avatarPreview.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+</script>
+
+</body>
+</html>
